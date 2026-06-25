@@ -1,6 +1,8 @@
 This is a small filter to allow you to create an image carousel.
 
-The carousel uses the [splide](https://splidejs.com/) typescript library.
+![](readme_assets\2026-06-25-12-27-47.gif)
+
+The carousel uses the [splide](https://splidejs.com/) typescript library. All credit for the actual library goes to Naotoshi Fujita and the other Splide contributors - this extension simply makes it easier to use in Quarto!
 
 ## Installation
 
@@ -105,6 +107,6 @@ We are happy to accept AI-supported contributions to the extension, but reserve 
 
 ## Alternatives
 
-Other carousels exist!
+Other quarto extensions for carousels exist!
 
 Check out [this bootstrap carousel component](https://github.com/tomicapretto/quarto-carousel) by [Tomás Capretto](https://github.com/tomicapretto).
