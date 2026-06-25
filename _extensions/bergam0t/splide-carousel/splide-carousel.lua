@@ -11,19 +11,27 @@
 -- ![Outpatient non-attendance](impact_posters/Outpatient non attendance.png)
 -- ![Stroke care simulation](impact_posters/Using Simulation to Improve Stroke Care and Reduce Costs.png){width="150px"}
 -- :::
-
+--
 -- The markdown alt text (the bit in square brackets) becomes the caption
 -- shown under each poster. Leave it blank -- ![](path.png) -- for no caption.
-
+--
 -- OPTIONAL DIV ATTRIBUTES (defaults match the original design)
---   interval="9000"        autoplay interval in ms
---   autoplay="false"       set to "false" to disable autoplay
---   padding="5rem"         Splide side padding
---   default-width="250px"  fallback slide width for images with no width set
-
+  -- interval="9000"            autoplay interval in ms
+  -- autoplay="false"           set to "false" to disable autoplay
+  -- padding="5rem"             Splide side padding (overrides the preview default below)
+  -- default-width="250px"      fallback slide width for images with no width set
+  -- preview="false"            "true" (default) peeks at the prev/next slide either
+  --                            side of center; "false" gives a standard one-at-a-time
+  --                            carousel with no padding/peek
+  -- toggle-bg-color="#222"     background colour of the play/pause toggle button --
+  --                            overrides the default set in splide-carousel.css;
+  --                            omit to just use the CSS default
+  -- toggle-text-color="#fff"   text/icon colour of the play/pause toggle button --
+  --                            same override behaviour as toggle-bg-color above
+--
 -- OPTIONAL PER-IMAGE ATTRIBUTE
 --   ![caption](src){width="150px"}   overrides the slide width for just that image
-
+--
 -- SETUP
 -- ------
 -- Add to your document YAML or _quarto.yml:
@@ -44,6 +52,35 @@ local function get_attr(div, key, default)
     return default
   end
   return v
+end
+
+-- Like get_attr but returns nil rather than a default when unset, so callers
+-- can tell "not specified" apart from "specified". Used for attributes whose
+-- real default lives in splide-carousel.css rather than here.
+local function raw_attr(div, key)
+  local v = div.attr.attributes[key]
+  if v == nil or v == "" then
+    return nil
+  end
+  return v
+end
+
+-- Builds a `style="..."` attribute (or an empty string) containing only the
+-- CSS custom properties the user actually overrode on this carousel. When
+-- nothing is overridden, no style attribute is emitted at all, and the
+-- defaults declared in splide-carousel.css apply untouched.
+local function build_style_override(toggle_bg_color, toggle_text_color)
+  local parts = {}
+  if toggle_bg_color then
+    table.insert(parts, "--splide-toggle-bg: " .. toggle_bg_color .. ";")
+  end
+  if toggle_text_color then
+    table.insert(parts, "--splide-toggle-color: " .. toggle_text_color .. ";")
+  end
+  if #parts == 0 then
+    return ""
+  end
+  return ' style="' .. table.concat(parts, " ") .. '"'
 end
 
 local function include_head_resources()
@@ -112,10 +149,23 @@ local function build_carousel(div)
   local id = "splide-carousel-" .. carousel_count
 
   local interval = get_attr(div, "interval", "9000")
-  local padding = get_attr(div, "padding", "5rem")
   local default_width = get_attr(div, "default-width", "250px")
   local autoplay_attr = get_attr(div, "autoplay", "true")
   local autoplay_js = (autoplay_attr == "false") and "false" or "'play'"
+
+  -- "preview" controls whether the prev/next slide peeks in either side of
+  -- center (the original look) or whether it's a standard one-at-a-time
+  -- carousel with no padding. Either way, an explicit padding="..." attribute
+  -- always wins.
+  local preview_attr = get_attr(div, "preview", "true")
+  local preview_enabled = preview_attr ~= "false"
+  local default_padding = preview_enabled and "5rem" or "0"
+  local focus_js = preview_enabled and "'center'" or "false"
+  local padding = get_attr(div, "padding", default_padding)
+
+  local toggle_bg_color = raw_attr(div, "toggle-bg-color")
+  local toggle_text_color = raw_attr(div, "toggle-text-color")
+  local style_override = build_style_override(toggle_bg_color, toggle_text_color)
 
   local slides = {}
   for _, img in ipairs(images) do
@@ -123,7 +173,7 @@ local function build_carousel(div)
   end
 
   local html = string.format([[
-<section id="%s" class="splide splide-carousel" aria-label="Beautiful Images">
+<section id="%s" class="splide splide-carousel" aria-label="Beautiful Images"%s>
   <div class="splide__optional-button-container">
     <button class="splide__toggle" type="button">
       <a class="splide__toggle__play"><i class="fa-solid fa-play"></i><span style="padding-left: 10px;">Resume Slideshow</span></a>
@@ -143,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
     padding: '%s',
     autoplay: %s,
     interval: %s,
-    focus: 'center',
+    focus: %s,
     pauseOnHover: true,
     pauseOnFocus: false,
     resetProgress: false
@@ -160,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
-]], id, table.concat(slides, "\n"), id, padding, autoplay_js, interval, id)
+]], id, style_override, table.concat(slides, "\n"), id, padding, autoplay_js, interval, focus_js, id)
 
   include_head_resources()
 

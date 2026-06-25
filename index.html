@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -74,6 +109,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="simple-carousel-example" class="level2">
 <h2 class="anchored" data-anchor-id="simple-carousel-example">Simple Carousel Example</h2>
 <p>Here is a carousel with three images.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>:::{.splide-carousel}</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="al">![](example_assets/1_intro_or_ds_python.jpeg)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="al">![](example_assets/2_des.jpeg)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="al">![](example_assets/3_geographic.jpeg)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="splide-carousel-1" class="splide splide-carousel" aria-label="Beautiful Images">
   <div class="splide__optional-button-container">
     <button class="splide__toggle" type="button">
@@ -113,6 +153,229 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var lightboxInstance = GLightbox({
     selector: '#splide-carousel-1 .glightbox',
+    touchNavigation: true,
+    loop: true
+  });
+
+  splideInstance.on('moved', function () {
+    lightboxInstance.reload();
+  });
+});
+</script>
+
+</section>
+<section id="standard-carousel-example" class="level2">
+<h2 class="anchored" data-anchor-id="standard-carousel-example">Standard carousel example</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>:::{.splide-carousel preview="false"}</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="al">![](example_assets/1_intro_or_ds_python.jpeg)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="al">![](example_assets/2_des.jpeg)</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="al">![](example_assets/3_geographic.jpeg)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="splide-carousel-2" class="splide splide-carousel" aria-label="Beautiful Images">
+  <div class="splide__optional-button-container">
+    <button class="splide__toggle" type="button">
+      <a class="splide__toggle__play" href=""><i class="fa-solid fa-play"></i><span style="padding-left: 10px;">Resume Slideshow</span></a>
+      <a class="splide__toggle__pause" href=""><i class="fa-solid fa-pause"></i><span style="padding-left: 10px;">Pause Slideshow</span></a>
+    </button>
+  </div>
+  <div class="splide__track">
+    <ul class="splide__list">
+      <li class="splide__slide" style="width: 250px">
+        <img src="example_assets/1_intro_or_ds_python.jpeg" alt="" class="glightbox">
+        <div class="splide_caption"></div>
+      </li>
+      <li class="splide__slide" style="width: 250px">
+        <img src="example_assets/2_des.jpeg" alt="" class="glightbox">
+        <div class="splide_caption"></div>
+      </li>
+      <li class="splide__slide" style="width: 250px">
+        <img src="example_assets/3_geographic.jpeg" alt="" class="glightbox">
+        <div class="splide_caption"></div>
+      </li>
+    </ul>
+  </div>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var splideInstance = new Splide('#splide-carousel-2', {
+    type: 'loop',
+    padding: '0',
+    autoplay: 'play',
+    interval: 9000,
+    focus: false,
+    pauseOnHover: true,
+    pauseOnFocus: false,
+    resetProgress: false
+  }).mount();
+
+  var lightboxInstance = GLightbox({
+    selector: '#splide-carousel-2 .glightbox',
+    touchNavigation: true,
+    loop: true
+  });
+
+  splideInstance.on('moved', function () {
+    lightboxInstance.reload();
+  });
+});
+</script>
+
+</section>
+<section id="captions" class="level2">
+<h2 class="anchored" data-anchor-id="captions">Captions</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>:::{.splide-carousel preview="false"}</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="al">![Intro to Python](example_assets/1_intro_or_ds_python.jpeg)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="al">![Discrete Event Simulation](example_assets/2_des.jpeg)</span>{width="100px"}</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="al">![Mapping and Geographic Optimization](example_assets/3_geographic.jpeg)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="splide-carousel-3" class="splide splide-carousel" aria-label="Beautiful Images">
+  <div class="splide__optional-button-container">
+    <button class="splide__toggle" type="button">
+      <a class="splide__toggle__play" href=""><i class="fa-solid fa-play"></i><span style="padding-left: 10px;">Resume Slideshow</span></a>
+      <a class="splide__toggle__pause" href=""><i class="fa-solid fa-pause"></i><span style="padding-left: 10px;">Pause Slideshow</span></a>
+    </button>
+  </div>
+  <div class="splide__track">
+    <ul class="splide__list">
+      <li class="splide__slide" style="width: 250px">
+        <img src="example_assets/1_intro_or_ds_python.jpeg" alt="Intro to Python" class="glightbox">
+        <div class="splide_caption">Intro to Python</div>
+      </li>
+      <li class="splide__slide" style="width: 250px">
+        <img src="example_assets/2_des.jpeg" alt="Discrete Event Simulation" class="glightbox">
+        <div class="splide_caption">Discrete Event Simulation</div>
+      </li>
+      <li class="splide__slide" style="width: 250px">
+        <img src="example_assets/3_geographic.jpeg" alt="Mapping and Geographic Optimization" class="glightbox">
+        <div class="splide_caption">Mapping and Geographic Optimization</div>
+      </li>
+    </ul>
+  </div>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var splideInstance = new Splide('#splide-carousel-3', {
+    type: 'loop',
+    padding: '5rem',
+    autoplay: 'play',
+    interval: 9000,
+    focus: 'center',
+    pauseOnHover: true,
+    pauseOnFocus: false,
+    resetProgress: false
+  }).mount();
+
+  var lightboxInstance = GLightbox({
+    selector: '#splide-carousel-3 .glightbox',
+    touchNavigation: true,
+    loop: true
+  });
+
+  splideInstance.on('moved', function () {
+    lightboxInstance.reload();
+  });
+});
+</script>
+
+<section id="preview-false" class="level3">
+<h3 class="anchored" data-anchor-id="preview-false">Preview = false</h3>
+<section id="splide-carousel-4" class="splide splide-carousel" aria-label="Beautiful Images">
+  <div class="splide__optional-button-container">
+    <button class="splide__toggle" type="button">
+      <a class="splide__toggle__play" href=""><i class="fa-solid fa-play"></i><span style="padding-left: 10px;">Resume Slideshow</span></a>
+      <a class="splide__toggle__pause" href=""><i class="fa-solid fa-pause"></i><span style="padding-left: 10px;">Pause Slideshow</span></a>
+    </button>
+  </div>
+  <div class="splide__track">
+    <ul class="splide__list">
+      <li class="splide__slide" style="width: 250px">
+        <img src="example_assets/1_intro_or_ds_python.jpeg" alt="Intro to Python" class="glightbox">
+        <div class="splide_caption">Intro to Python</div>
+      </li>
+      <li class="splide__slide" style="width: 250px">
+        <img src="example_assets/2_des.jpeg" alt="Discrete Event Simulation" class="glightbox">
+        <div class="splide_caption">Discrete Event Simulation</div>
+      </li>
+      <li class="splide__slide" style="width: 250px">
+        <img src="example_assets/3_geographic.jpeg" alt="Mapping and Geographic Optimization" class="glightbox">
+        <div class="splide_caption">Mapping and Geographic Optimization</div>
+      </li>
+    </ul>
+  </div>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var splideInstance = new Splide('#splide-carousel-4', {
+    type: 'loop',
+    padding: '0',
+    autoplay: 'play',
+    interval: 9000,
+    focus: false,
+    pauseOnHover: true,
+    pauseOnFocus: false,
+    resetProgress: false
+  }).mount();
+
+  var lightboxInstance = GLightbox({
+    selector: '#splide-carousel-4 .glightbox',
+    touchNavigation: true,
+    loop: true
+  });
+
+  splideInstance.on('moved', function () {
+    lightboxInstance.reload();
+  });
+});
+</script>
+
+</section>
+</section>
+<section id="intervals" class="level2">
+<h2 class="anchored" data-anchor-id="intervals">Intervals</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>:::{.splide-carousel preview="false" interval="1000"}</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="al">![Intro to Python](example_assets/1_intro_or_ds_python.jpeg)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="al">![Discrete Event Simulation](example_assets/2_des.jpeg)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="al">![Mapping and Geographic Optimization](example_assets/3_geographic.jpeg)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="splide-carousel-5" class="splide splide-carousel" aria-label="Beautiful Images">
+  <div class="splide__optional-button-container">
+    <button class="splide__toggle" type="button">
+      <a class="splide__toggle__play" href=""><i class="fa-solid fa-play"></i><span style="padding-left: 10px;">Resume Slideshow</span></a>
+      <a class="splide__toggle__pause" href=""><i class="fa-solid fa-pause"></i><span style="padding-left: 10px;">Pause Slideshow</span></a>
+    </button>
+  </div>
+  <div class="splide__track">
+    <ul class="splide__list">
+      <li class="splide__slide" style="width: 250px">
+        <img src="example_assets/1_intro_or_ds_python.jpeg" alt="Intro to Python" class="glightbox">
+        <div class="splide_caption">Intro to Python</div>
+      </li>
+      <li class="splide__slide" style="width: 250px">
+        <img src="example_assets/2_des.jpeg" alt="Discrete Event Simulation" class="glightbox">
+        <div class="splide_caption">Discrete Event Simulation</div>
+      </li>
+      <li class="splide__slide" style="width: 250px">
+        <img src="example_assets/3_geographic.jpeg" alt="Mapping and Geographic Optimization" class="glightbox">
+        <div class="splide_caption">Mapping and Geographic Optimization</div>
+      </li>
+    </ul>
+  </div>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var splideInstance = new Splide('#splide-carousel-5', {
+    type: 'loop',
+    padding: '5rem',
+    autoplay: 'play',
+    interval: 1000,
+    focus: 'center',
+    pauseOnHover: true,
+    pauseOnFocus: false,
+    resetProgress: false
+  }).mount();
+
+  var lightboxInstance = GLightbox({
+    selector: '#splide-carousel-5 .glightbox',
     touchNavigation: true,
     loop: true
   });

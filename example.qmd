@@ -13,8 +13,81 @@ filters:
 
 Here is a carousel with three images.
 
+```md
 :::{.splide-carousel}
 ![](example_assets/1_intro_or_ds_python.jpeg)
 ![](example_assets/2_des.jpeg)
 ![](example_assets/3_geographic.jpeg)
+:::
+```
+
+:::{.splide-carousel}
+![](example_assets/1_intro_or_ds_python.jpeg)
+![](example_assets/2_des.jpeg)
+![](example_assets/3_geographic.jpeg)
+:::
+
+## Standard carousel example
+
+```md
+:::{.splide-carousel preview="false"}
+![](example_assets/1_intro_or_ds_python.jpeg)
+![](example_assets/2_des.jpeg)
+![](example_assets/3_geographic.jpeg)
+:::
+```
+
+:::{.splide-carousel preview="false"}
+![](example_assets/1_intro_or_ds_python.jpeg)
+![](example_assets/2_des.jpeg)
+![](example_assets/3_geographic.jpeg)
+:::
+
+## Captions
+
+```md
+:::{.splide-carousel preview="false"}
+![Intro to Python](example_assets/1_intro_or_ds_python.jpeg)
+![Discrete Event Simulation](example_assets/2_des.jpeg){width="100px"}
+![Mapping and Geographic Optimization](example_assets/3_geographic.jpeg)
+:::
+```
+
+:::{.splide-carousel}
+![Intro to Python](example_assets/1_intro_or_ds_python.jpeg)
+![Discrete Event Simulation](example_assets/2_des.jpeg)
+![Mapping and Geographic Optimization](example_assets/3_geographic.jpeg)
+:::
+
+
+### Preview = false
+
+:::{.splide-carousel preview="false"}
+![Intro to Python](example_assets/1_intro_or_ds_python.jpeg)
+![Discrete Event Simulation](example_assets/2_des.jpeg)
+![Mapping and Geographic Optimization](example_assets/3_geographic.jpeg)
+:::
+
+
+
+## Intervals
+
+Set the interval parameter to speed up or slow down the transition between slides. Note that this is specified in ms (1 second = 1000ms) and must be passed as a string containing just the number (i.e. no unit).
+
+Default is 9 seconds.
+
+Below is an example of 1 second ("1000").
+
+```md
+:::{.splide-carousel preview="false" interval="1000"}
+![Intro to Python](example_assets/1_intro_or_ds_python.jpeg)
+![Discrete Event Simulation](example_assets/2_des.jpeg)
+![Mapping and Geographic Optimization](example_assets/3_geographic.jpeg)
+:::
+```
+
+:::{.splide-carousel interval="1000"}
+![Intro to Python](example_assets/1_intro_or_ds_python.jpeg)
+![Discrete Event Simulation](example_assets/2_des.jpeg)
+![Mapping and Geographic Optimization](example_assets/3_geographic.jpeg)
 :::

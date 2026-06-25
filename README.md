@@ -58,7 +58,7 @@ e.g.
 ```md
 ::: {.splide-carousel}
 ![Outpatient non-attendance](impact_posters/Outpatient non attendance.png)
-![Stroke care simulation](impact_posters/Using Simulation to Improve Stroke Care and Reduce Costs.png){width="150px"}
+![Stroke care simulation](impact_posters/Using Simulation to Improve Stroke Care and Reduce Costs.png)
 :::
 ```
 
@@ -78,17 +78,18 @@ There are various attributes you can pass in when initialising the carousel div.
 
 e.g.
 
-OPTIONAL DIV ATTRIBUTES (defaults match the original design)
-  interval="9000"        autoplay interval in ms
-  autoplay="false"       set to "false" to disable autoplay
-  padding="5rem"         Splide side padding
-  default-width="250px"  fallback slide width for images with no width set
-
-#### Per image
-
-OPTIONAL PER-IMAGE ATTRIBUTE
-  ![caption](src){width="150px"}   overrides the slide width for just that image
-
+  interval="9000"            autoplay interval in ms
+  autoplay="false"           set to "false" to disable autoplay
+  padding="5rem"             Splide side padding (overrides the preview default below)
+  default-width="250px"      fallback slide width for images with no width set
+  preview="false"            "true" (default) peeks at the prev/next slide either
+                             side of center; "false" gives a standard one-at-a-time
+                             carousel with no padding/peek
+  toggle-bg-color="#222"     background colour of the play/pause toggle button --
+                             overrides the default set in splide-carousel.css;
+                             omit to just use the CSS default
+  toggle-text-color="#000"   text/icon colour of the play/pause toggle button --
+                             same override behaviour as toggle-bg-color above
 
 ## Contributing
 
