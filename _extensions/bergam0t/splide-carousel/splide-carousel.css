@@ -1,0 +1,23 @@
+body {
+	text-align: center;
+}
+
+.splide__slide img {
+  width: 100%;
+  max-height: auto;
+  padding: 20px;
+}
+
+.splide__optional-button-container {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  text-align: right;
+  font-size: 1rem;
+}
+
+.splide__toggle a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 200;
+}

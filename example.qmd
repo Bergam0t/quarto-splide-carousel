@@ -1,0 +1,20 @@
+---
+title: "Splide Image Carousel Example"
+format:
+    html:
+        output-file: index.html
+        height: 800 # default height and width ensure consistent behaviour on different screens
+        width: 1250
+filters:
+    - splide-carousel
+---
+
+## Simple Carousel Example
+
+Here is a carousel with three images.
+
+:::{.splide-carousel}
+![](example_assets/1_intro_or_ds_python.jpeg)
+![](example_assets/2_des.jpeg)
+![](example_assets/3_geographic.jpeg)
+:::
